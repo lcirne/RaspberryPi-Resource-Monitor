@@ -22,8 +22,16 @@ def get_system_resource_usage():
     bytes_recv = network.bytes_recv
 
     # Current IP
-    local_ips = get_local_ips()
-    en0 = local_ips['en0']
+    ips = get_local_ips() # Dictionary of ip address types and addresses
+    if 'en0' in ips:
+        en0 = ips['en0']
+        current_ip = ('en0', en0)
+    elif 'wlp4s0' in ips:
+        wlp4s0 = ips['wlp4s0']
+        current_ip = ('wlp4s0', wlp4s0)
+    else:
+        local_ip = ips['lo']
+        current_ip = ('local', local_ip)
 
     # Load items into dictionary and serialize as json
     system_resource_usage = {}
@@ -32,8 +40,7 @@ def get_system_resource_usage():
     system_resource_usage['disk_usage'] = disk_usage
     system_resource_usage['bytes_sent'] = bytes_sent
     system_resource_usage['bytes_recv'] = bytes_recv
-    system_resource_usage['en0'] = en0
-    # TODO Json stuff 
+    system_resource_usage[current_ip[0]] = current_ip[1]
     info_json = json.dumps(system_resource_usage, indent=4)
     return info_json
 
