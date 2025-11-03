@@ -38,7 +38,6 @@ def get_system_resource_usage():
     return info_json
 
 
-
 # Function to parse psutil.net_if_addrs() output for 'address' variable
 def get_local_ips():
     ip_addresses = {}
