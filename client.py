@@ -2,8 +2,8 @@ import socket
 import time
 from monitor import get_system_resource_usage
 
-host = "10.0.0.123"  # Pi’s static IP
-#host = "10.245.70.50"
+#host = "10.0.0.123"  # Pi’s static IP
+host = socket.gethostbyname(socket.gethostname()) # Mac's IP
 port = 4000
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
