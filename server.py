@@ -1,31 +1,7 @@
 import socket
 import sqlite3
 import json
-
-class DB:
-    def __init__(self):
-        conn = sqlite3.connect('resources.db')
-        cur = conn.cursor()
-        cur.execute('''CREATE TABLE IF NOT EXISTS client_resources(
-                    id INTEGER PRIMARY KEY,
-                    client_ip TEXT,
-                    client_hostname TEXT,
-                    ip_type TEXT,
-                    cpu_usage float,
-                    memory_usage float,
-                    bytes_sent INT,
-                    bytes_recv INT,
-                    disk_usage float
-                    )''')
-    def save_client_data(self, data: dict):
-        data = json.loads(data)
-        columns = ', '.join(list(data.keys()))
-        placeholders = ', '.join(['?' for _ in data.values()])
-        values = tuple(data.values())
-        query = f'INSERT into client_resources({columns}) VALUES ({placeholders})'
-        self.cur.execute(query, values)
-        self.conn.commit()
-
+from db import DB
 
 def main():
     db = DB()
@@ -42,6 +18,9 @@ def main():
         while conn:
             try:
                 client_message = conn.recv(1024).decode()
+                print("Saving client data...")
+                db.save_client_data(json.loads(client_message))
+                print("Saved!")
                 print(f"From client: {client_message}")
                 message = f"Json from client: {client_message}"
                 conn.send(message.encode())
