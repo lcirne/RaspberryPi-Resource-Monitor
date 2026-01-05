@@ -45,7 +45,7 @@ cpu_usage_frame = Frame(
 )
 cpu_usage_frame.grid(row=1, column=0, sticky='n', padx=5, pady=5)
 try:
-    cpu_image_filepath = 'resource_graphs/test-cpu-graph.png'
+    cpu_image_filepath = 'resource_graphs/cpu_usage.png'
     pil_cpu_image = Image.open(cpu_image_filepath)
     pil_cpu_image = pil_cpu_image.resize((250,187), Image.Resampling.LANCZOS)
     tk_cpu_image = ImageTk.PhotoImage(pil_cpu_image)
@@ -67,7 +67,7 @@ mem_usage_frame = Frame(
 )
 mem_usage_frame.grid(row=1, column=1, sticky='n', padx=5, pady=5)
 try:
-    mem_image_filepath = 'resource_graphs/test-mem-graph.png'
+    mem_image_filepath = 'resource_graphs/ram_usage.png'
     pil_mem_image = Image.open(mem_image_filepath)
     pil_mem_image = pil_mem_image.resize((250, 187), Image.Resampling.LANCZOS)
     tk_mem_image = ImageTk.PhotoImage(pil_mem_image)
