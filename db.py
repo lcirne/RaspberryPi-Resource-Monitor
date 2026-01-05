@@ -59,11 +59,21 @@ class DB:
             return None
 
 
-    def extract_field_from_data(self, field: str, records: list[dict]) -> list[float]:
+    def extract_field_from_data(self,
+                                field: str,
+                                records: list[dict],
+                                num_records=15) -> list[float]:
         '''Return 15 values for a certain field in the database for graphing'''
         record_values = []
         for record in records:
             record_values.append(record.get(field))
-        while len(record_values) < 15:
+        while len(record_values) < num_records:
             record_values.insert(0, 0)
         return record_values
+
+
+if __name__=='__main__':
+    db = DB()
+    client_data = db.get_client_data("192.168.68.51")
+    client_ram_usage = db.extract_field_from_data('memory_usage', client_data)
+    print(client_ram_usage)

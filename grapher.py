@@ -14,6 +14,14 @@ class Grapher:
         plt.plot(ram_usage_values)
         plt.ylabel("RAM Usage")
         plt.show()
+        plt.savefig('resource_graphs/ram_usage.png')
+        plt.clf()
+
+    def graph_network_usage(self, network_usage_values: list[float]) -> str:
+        plt.plot(network_usage_values)
+        plt.ylabel("Bytes Sent Over Network")
+        plt.show()
+        plt.savefig('resource_graphs/network_usage.png')
         plt.clf()
 
 
