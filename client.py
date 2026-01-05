@@ -15,7 +15,6 @@ def main():
         monitor = Monitor()
         while True:
             info = monitor.get_system_resource_usage()
-            message = "Test message"
             client.send(info.encode())
             server_response = client.recv(1024).decode()
             print(f"From server: {server_response}")

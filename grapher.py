@@ -1,26 +1,34 @@
+import math
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 from db import DB
 
 class Grapher:
     def graph_cpu_usage(self, cpu_usage_values: list[float]) -> str:
-        plt.plot(cpu_usage_values)
+        numvals = len(cpu_usage_values)
+        plt.plot(range(1, numvals+1), cpu_usage_values)
+        plt.ylim(0, 100)
         plt.ylabel("CPU Usage Percentage")
-        plt.show()
+        #plt.show()
         plt.savefig('resource_graphs/cpu_usage.png')
         plt.clf()
 
     def graph_ram_usage(self, ram_usage_values: list[float], total_memory: float) -> str:
-        plt.plot(ram_usage_values)
+        numvals = len(ram_usage_values)
+        total_memory = math.ceil(max(total_memory))
+        plt.plot(range(1, numvals+1), ram_usage_values)
+        plt.ylim(0, total_memory)
         plt.ylabel("RAM Usage")
-        plt.show()
+        #plt.show()
         plt.savefig('resource_graphs/ram_usage.png')
         plt.clf()
 
     def graph_network_usage(self, network_usage_values: list[float]) -> str:
-        plt.plot(network_usage_values)
+        numvals = len(network_usage_values)
+        plt.plot(range(1, numvals+1), network_usage_values)
         plt.ylabel("Bytes Sent Over Network")
-        plt.show()
+        #plt.show()
         plt.savefig('resource_graphs/network_usage.png')
         plt.clf()
 
