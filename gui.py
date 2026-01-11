@@ -45,7 +45,7 @@ cpu_usage_frame = Frame(
 )
 cpu_usage_frame.grid(row=1, column=0, sticky='n', padx=5, pady=5)
 try:
-    cpu_image_filepath = 'resource_graphs/test-cpu-graph.png'
+    cpu_image_filepath = 'resource_graphs/cpu_usage.png'
     pil_cpu_image = Image.open(cpu_image_filepath)
     pil_cpu_image = pil_cpu_image.resize((250,187), Image.Resampling.LANCZOS)
     tk_cpu_image = ImageTk.PhotoImage(pil_cpu_image)
@@ -67,7 +67,7 @@ mem_usage_frame = Frame(
 )
 mem_usage_frame.grid(row=1, column=1, sticky='n', padx=5, pady=5)
 try:
-    mem_image_filepath = 'resource_graphs/test-mem-graph.png'
+    mem_image_filepath = 'resource_graphs/ram_usage.png'
     pil_mem_image = Image.open(mem_image_filepath)
     pil_mem_image = pil_mem_image.resize((250, 187), Image.Resampling.LANCZOS)
     tk_mem_image = ImageTk.PhotoImage(pil_mem_image)
@@ -78,6 +78,28 @@ except FileNotFoundError:
 if tk_mem_image:
     mem_usage_label = Label(mem_usage_frame, image=tk_mem_image)
     mem_usage_label.grid(row=1, column=1, padx=0, pady=0)
+
+
+# Bytes sent
+bytes_sent_frame = Frame(
+    root,
+    bg='grey',
+    relief='solid',
+    borderwidth=2
+)
+bytes_sent_frame.grid(row=2, cloumn=1, sticky='n', padx=5, pady=5)
+try:
+    bytes_sent_image_filepath = 'resource_graphs/bytes_sent.png'
+    pil_bytes_sent_image = Image.open(bytes_sent_image_filepath)
+    pil_bytes_sent_image = pil_bytes_sent_image.resize((250, 187), Image.Resampling.LANCZOS)
+    tk_bytes_sent_image = ImageTK.PhotoImage(pil_bytes_sent_image)
+except FileNotFoundError:
+    print(f'{bytes_sent_image_filepath} not found.')
+    root.destroy()
+
+if tk_bytes_sent_image:
+    bytes_sent_label = Label(bytes_sent_frame, image=tk_bytes_sent_image)
+    bytes_sent_label.grid(row=2, column=1, padx=0, pady=0)
 
 
 # Stop button
