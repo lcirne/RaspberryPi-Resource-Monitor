@@ -2,7 +2,7 @@ import socket
 import sqlite3
 
 def save_usage_data(data_json):
-
+    pass
 
 
 def main():
