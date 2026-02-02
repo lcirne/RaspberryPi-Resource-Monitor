@@ -3,7 +3,7 @@ import json
 from typing import Optional, Union
 
 class DB:
-    def __init__(self):
+    def __init__(self, item_limit=14):
         self.conn = sqlite3.connect('resources.db')
         self.cur = self.conn.cursor()
         self.cur.execute('''CREATE TABLE IF NOT EXISTS client_resources(
@@ -18,6 +18,7 @@ class DB:
                     bytes_recv INT,
                     disk_usage float
                     )''')
+        self.item_limit = item_limit
 
     def save_client_data(self, data: dict[str, Union[str, int, float]]) -> bool:
         try:
@@ -63,7 +64,10 @@ class DB:
                                 field: str,
                                 records: list[dict],
                                 num_records=15) -> list[float]:
-        '''Return 15 values for a certain field in the database for graphing'''
+        '''
+        Return num_records values for a certain field in the database for graphing.
+        TODO: use item_limit to replace records with 0's
+        '''
         record_values = []
         for record in records:
             record_values.append(record.get(field))

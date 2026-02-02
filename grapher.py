@@ -5,6 +5,9 @@ import numpy as np
 from db import DB
 
 class Grapher:
+    def __init__(self, item_limit=0):
+        self.item_limit = item_limit
+
     def graph_cpu_usage(self, cpu_usage_values: list[float]) -> str:
         numvals = len(cpu_usage_values)
         plt.plot(range(1, numvals+1), cpu_usage_values)
