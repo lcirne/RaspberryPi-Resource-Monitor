@@ -39,7 +39,8 @@ class Grapher:
 if __name__ == '__main__':
     g = Grapher()
     db = DB()
-    client_data = db.get_client_data('10.245.81.94')
+    #client_data = db.get_client_data('10.245.81.94')    # macbook's ip
+    client_data = db.get_client_data('10.0.0.126')      # rpi's ip
 
     cpu_data = db.extract_field_from_data('cpu_usage', client_data)
     #print(cpu_data)

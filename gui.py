@@ -87,12 +87,12 @@ bytes_sent_frame = Frame(
     relief='solid',
     borderwidth=2
 )
-bytes_sent_frame.grid(row=2, cloumn=1, sticky='n', padx=5, pady=5)
+bytes_sent_frame.grid(row=2, column=1, sticky='n', padx=5, pady=5)
 try:
-    bytes_sent_image_filepath = 'resource_graphs/bytes_sent.png'
+    bytes_sent_image_filepath = 'resource_graphs/network_usage.png'
     pil_bytes_sent_image = Image.open(bytes_sent_image_filepath)
     pil_bytes_sent_image = pil_bytes_sent_image.resize((250, 187), Image.Resampling.LANCZOS)
-    tk_bytes_sent_image = ImageTK.PhotoImage(pil_bytes_sent_image)
+    tk_bytes_sent_image = ImageTk.PhotoImage(pil_bytes_sent_image)
 except FileNotFoundError:
     print(f'{bytes_sent_image_filepath} not found.')
     root.destroy()
