@@ -2,7 +2,7 @@ import argparse
 import json
 import socket
 import threading
-from typing import Optional
+from typing import List, Optional, Tuple
 
 from db import DB
 
@@ -14,7 +14,7 @@ class ResourceServer:
         self.db_path = db_path
         self._server_socket: Optional[socket.socket] = None
         self._stop_event = threading.Event()
-        self._threads: list[threading.Thread] = []
+        self._threads: List[threading.Thread] = []
 
     def serve_forever(self) -> None:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
@@ -51,7 +51,7 @@ class ResourceServer:
         if self._server_socket:
             self._server_socket.close()
 
-    def _handle_client(self, conn: socket.socket, address: tuple[str, int]) -> None:
+    def _handle_client(self, conn: socket.socket, address: Tuple[str, int]) -> None:
         db = DB(self.db_path)
         print(f"Connection from {address[0]}:{address[1]}")
         with conn, db.conn:

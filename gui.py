@@ -1,6 +1,7 @@
 import argparse
 import socket
 import time
+from typing import Dict, List, Optional
 from tkinter import LEFT, Canvas, Frame, Label, Listbox, Tk
 
 from db import DB
@@ -26,7 +27,7 @@ class MetricCard(Frame):
         super().__init__(parent, bg=PANEL, highlightthickness=1, highlightbackground=GRID)
         self.color = color
         self.unit = unit
-        self.values: list[float] = []
+        self.values: List[float] = []
         self.max_value = 100.0
 
         self.columnconfigure(0, weight=1)
@@ -57,11 +58,11 @@ class MetricCard(Frame):
 
     def update_metric(
         self,
-        current: float | None,
-        values: list[float],
+        current: Optional[float],
+        values: List[float],
         max_value: float,
         detail: str,
-        unit: str | None = None,
+        unit: Optional[str] = None,
     ) -> None:
         self.values = values[-60:]
         self.max_value = max(max_value, 1)
@@ -98,8 +99,8 @@ class Dashboard:
         self.root = root
         self.db = DB(db_path)
         self.server = server
-        self.selected_ip: str | None = None
-        self.client_rows: list[dict] = []
+        self.selected_ip: Optional[str] = None
+        self.client_rows: List[Dict] = []
 
         root.title("Resource Monitor")
         root.configure(bg=BG)
@@ -226,7 +227,7 @@ class Dashboard:
             if ip == current_selection:
                 self.client_list.selection_set(index)
 
-    def _refresh_metrics(self, latest: dict | None, history: list[dict]) -> None:
+    def _refresh_metrics(self, latest: Optional[Dict], history: List[Dict]) -> None:
         if not latest:
             self.status_label.configure(text="Listening for clients on port 4000", fg=MUTED)
             self.client_detail.configure(text="Run: python client.py <pi-ip>")
@@ -290,7 +291,7 @@ class Dashboard:
         self.root.destroy()
 
 
-def format_value(value: float | None, unit: str) -> str:
+def format_value(value: Optional[float], unit: str) -> str:
     if value is None:
         return "--"
     if unit == "%":

@@ -2,7 +2,7 @@ import sqlite3
 import time
 from pathlib import Path
 from threading import Lock
-from typing import Optional, Union
+from typing import Dict, List, Optional, Union
 
 
 MetricValue = Union[str, int, float]
@@ -73,7 +73,7 @@ class DB:
                     self.cur.execute(statement)
             self.conn.commit()
 
-    def save_client_data(self, data: dict[str, MetricValue]) -> bool:
+    def save_client_data(self, data: Dict[str, MetricValue]) -> bool:
         if not isinstance(data, dict):
             return False
 
@@ -97,7 +97,7 @@ class DB:
             print(f"--- A critical error occurred while saving client data: {e}")
             return False
 
-    def list_clients(self) -> list[dict]:
+    def list_clients(self) -> List[Dict]:
         query = """
             SELECT cr.*
             FROM client_resources cr
@@ -138,7 +138,7 @@ class DB:
             print(f"--- A critical error occurred while fetching latest client data: {e}")
             return None
 
-    def get_client_data(self, ip: str, num_records: int = 60) -> list[dict]:
+    def get_client_data(self, ip: str, num_records: int = 60) -> List[Dict]:
         query = """
             SELECT * FROM client_resources
             WHERE client_ip = ?
@@ -156,9 +156,9 @@ class DB:
     def extract_field_from_data(
         self,
         field: str,
-        records: list[dict],
+        records: List[Dict],
         num_records: int = 60,
-    ) -> list[float]:
+    ) -> List[float]:
         record_values = [float(record.get(field) or 0) for record in records]
         while len(record_values) < num_records:
             record_values.insert(0, 0)
