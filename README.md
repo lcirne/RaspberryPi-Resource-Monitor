@@ -1,7 +1,8 @@
 # Raspberry Pi Resource Monitor
-
 A touchscreen dashboard for a Raspberry Pi that receives live system resource data
 from other computers on the network.
+
+<img width="835" height="487" alt="Screenshot 2026-06-09 at 12 45 53 PM" src="https://github.com/user-attachments/assets/a323c5a8-11e9-4076-a224-86631d5246ee" />
 
 ## Setup
 
