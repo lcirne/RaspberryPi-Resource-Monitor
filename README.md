@@ -37,11 +37,6 @@ On each laptop or desktop that should appear on the Pi:
 python3 client.py <pi-ip-address>
 ```
 
-Example:
-
-```bash
-python3 client.py 192.168.1.50
-```
 
 Clients reconnect automatically if the Pi server restarts or the network drops.
 
