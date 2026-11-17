@@ -4,7 +4,6 @@ import time
 
 import psutil
 
-
 class Monitor:
     def __init__(self):
         self.last_network = psutil.net_io_counters()

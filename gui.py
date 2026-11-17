@@ -31,6 +31,7 @@ class MetricCard(Frame):
         self.max_value = 100.0
 
         self.columnconfigure(0, weight=1)
+        self.rowconfigure(3, weight=1)
         Label(self, text=title.upper(), bg=PANEL, fg=MUTED, font=("DejaVu Sans", 10, "bold")).grid(
             row=0, column=0, sticky="w", padx=14, pady=(12, 0)
         )
@@ -53,7 +54,7 @@ class MetricCard(Frame):
         )
         self.detail_label.grid(row=2, column=0, sticky="ew", padx=14)
         self.canvas = Canvas(self, height=72, bg=PANEL, highlightthickness=0)
-        self.canvas.grid(row=3, column=0, sticky="ew", padx=10, pady=(4, 10))
+        self.canvas.grid(row=3, column=0, sticky="nsew", padx=10, pady=(4, 10))
         self.canvas.bind("<Configure>", lambda _event: self.draw())
 
     def update_metric(
